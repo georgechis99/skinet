@@ -1,0 +1,23 @@
+<div class="DropdownContainer">
+    <button type="button" class="btn btn-outline-secondary my-2" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">{{title}}
+    </button>
+    <div id="collapseBasic" [collapse]="isCollapsed">
+        <div class="well well-lg card card-block card-header">
+
+            <div class="DropdownContainer__Collapse">
+                <div class="DropdownContainer__Collapse__Search">
+                    <input class="DropdownContainer__Collapse__Search__SearchBar mb-2" placeholder="Search {{title}}" type="text">
+                    <a href="#"></a>
+                </div>
+                <div class="DropdownContainer__Collapse__Multiselect">
+                    <div class="DropdownContainer__Collapse__Multiselect_List" *ngFor="let value of values; let i = index">
+                        <mat-checkbox (change)="checkCheckBoxvalue($event)">xyz</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
