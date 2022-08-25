@@ -48,6 +48,24 @@ namespace API.Controllers
             return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
+         [HttpGet("fromBrand/{brandId}")]
+        public async Task<ActionResult<int>> GetCountOfProductsFromBrand(int brandId){
+
+            var countSpec = new CountProductsFromBrandSpecification(brandId);
+            var countOfProductsFromBrand = await _productsRepo.CountAsync(countSpec);
+
+            return Ok(countOfProductsFromBrand);
+        }
+
+        [HttpGet("ofType/{typeId}")]
+        public async Task<ActionResult<int>> GetCountOfProductsOfType(int typeId){
+
+            var countSpec = new CountProductsOfTypeSpecification(typeId);
+            var countOfProductsOfType = await _productsRepo.CountAsync(countSpec);
+
+            return Ok(countOfProductsOfType);
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]       //these 2 lines are documentation for Swagger for it to know what kind 
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]   // of responses this endpoint could return
@@ -65,16 +83,46 @@ namespace API.Controllers
         }
 
         [HttpGet("brands")]
-        public async Task<ActionResult<List<ProductBrand>>> GetProductBrands(){
+        public async Task<ActionResult<List<BrandToReturnDto>>> GetProductBrands(){
             var brands = await _productBrandRepo.ListAllAsync();
+            
+            var brandDtos = new List<BrandToReturnDto>();
 
-            return Ok(brands);
+            foreach(ProductBrand brand in brands){
+                 var countSpec = new CountProductsFromBrandSpecification(brand.Id);
+                 var countOfProductsFromBrand = await _productsRepo.CountAsync(countSpec);
+
+                 var brandDto = new BrandToReturnDto(brand.Id, brand.Name);
+                 brandDto.ProductsCount = countOfProductsFromBrand;
+
+                 brandDtos.Add(brandDto);
+                
+            }
+
+            return Ok(brandDtos);
         }
 
         [HttpGet("types")]
-        public async Task<ActionResult<List<ProductBrand>>> GetProductTypes(){
+        public async Task<ActionResult<List<TypeToReturnDto>>> GetProductTypes(){
             var types = await _productTypeRepo.ListAllAsync();
-            return Ok(types);
+            
+            
+            var typeDtos = new List<TypeToReturnDto>();
+
+            foreach(ProductType type in types){
+                 var countSpec = new CountProductsOfTypeSpecification(type.Id);
+                 var countOfProductsOfType = await _productsRepo.CountAsync(countSpec);
+
+                 var typeDto = new TypeToReturnDto(type.Id, type.Name);
+                 typeDto.ProductsCount = countOfProductsOfType;
+
+                 typeDtos.Add(typeDto);
+                
+            }
+
+            return Ok(typeDtos);
         }
+
+
     }
 }

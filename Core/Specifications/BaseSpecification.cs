@@ -19,6 +19,8 @@ namespace Core.Specifications
 
         public Expression<Func<T, object>> OrderByDescending {get; private set;}
 
+         public Expression<Func<T, object>> Count {get; private set;}
+
         public int Take {get; private set;}
 
         public int Skip {get; private set;}
@@ -44,6 +46,10 @@ namespace Core.Specifications
 
         protected void AddOrderBy(Expression<Func<T, object>> orderByExpression){
             OrderBy = orderByExpression;
+        }
+
+        protected void AddCount(Expression<Func<T, object>> countExpression){
+            Count = countExpression;
         }
 
         protected void AddOrderByDescending(Expression<Func<T, object>> orderByDescExpression){

@@ -5,8 +5,10 @@ import { PagingHeaderComponent } from './Components/paging-header/paging-header.
 import { CustomMultiselectDropdownComponent } from './Components/custom-multiselect-dropdown/custom-multiselect-dropdown.component'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagerComponent } from './Components/pager/pager.component';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -16,10 +18,10 @@ import { PagerComponent } from './Components/pager/pager.component';
     
   ],
   imports: [
+    FormsModule,
     CommonModule,
     PaginationModule.forRoot(),
     MatCheckboxModule,
-    BrowserAnimationsModule,
     CollapseModule.forRoot(),
   ],
   exports: [

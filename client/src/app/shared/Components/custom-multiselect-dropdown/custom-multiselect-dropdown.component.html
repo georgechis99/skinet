@@ -1,23 +1,25 @@
 <div class="DropdownContainer">
-    <button type="button" class="btn btn-outline-secondary my-2" (click)="isCollapsed = !isCollapsed"
-        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">{{title}}
-    </button>
-    <div id="collapseBasic" [collapse]="isCollapsed">
-        <div class="well well-lg card card-block card-header">
-
-            <div class="DropdownContainer__Collapse">
-                <div class="DropdownContainer__Collapse__Search">
-                    <input class="DropdownContainer__Collapse__Search__SearchBar mb-2" placeholder="Search {{title}}" type="text">
-                    <a href="#"></a>
-                </div>
-                <div class="DropdownContainer__Collapse__Multiselect">
-                    <div class="DropdownContainer__Collapse__Multiselect_List" *ngFor="let value of values; let i = index">
-                        <mat-checkbox (change)="checkCheckBoxvalue($event)">xyz</mat-checkbox>
-                    </div>
-                </div>
-            </div>
-
+    <div class="DropdownContainer__Header" (click)="isCollapsed = !isCollapsed">
+        <div class="DropdownContainer__Header__Title">
+            {{title}}
+        </div>
+        <div class="DropdownContainer__Header__Icon">
+            <i class="fa fa-angle-down fa-2x" *ngIf="isCollapsed"></i>
+            <i class="fa fa-angle-up fa-2x" *ngIf="!isCollapsed"></i>
         </div>
     </div>
-    
+    <div class="DropdownContainer__Collapse" [collapse]="isCollapsed">
+        <div class="DropdownContainer__Collapse__Search">
+            <input [(ngModel)]="enteredSearchValue" (input)="onSearchTermChanged()"
+                class="DropdownContainer__Collapse__Search__SearchBar" placeholder="Search {{title}}" type="text">
+            <a href="#"></a>
+        </div>
+        <div class="DropdownContainer__Collapse__Multiselect">
+            <div class="DropdownContainer__Collapse__Multiselect_List"
+                *ngFor="let filterItem of filterItems; let i = index">
+                <mat-checkbox [(ngModel)]="filterItem.checked" (change)="getCheckedItems()">{{filterItem.name}}
+                </mat-checkbox>
+            </div>
+        </div>
+    </div>
 </div>

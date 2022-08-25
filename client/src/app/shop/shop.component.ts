@@ -20,14 +20,21 @@ export class ShopComponent implements OnInit {
   totalCount: number;
   multiselectDropdownTitle = "Brands";
   multiselectDropdownValues = [
-    "Nike", "Adidas", "Apple", "Asus", "Gigabyte"
+    "Nike", "Adidas", "Apple", "Asus", "Gigabyte", "Finland",
+    "Russia", "Latvia", "Lithuania", "Poland", "A", "B", "C", "D", "India", "USA", "UK", "Russia",
+    "Sunday", "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
   ]
+
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
     { name: 'Price: High to Low', value: 'priceDesc' }
   ];
-
 
   constructor(private shopService: ShopService) { }
 
@@ -52,11 +59,25 @@ export class ShopComponent implements OnInit {
 
   getBrands() {
     this.shopService.getBrands().subscribe(response => {
-      this.brands = [{ id: 0, name: 'All' }, ...response];
+      this.brands = [{ id: 0, name: 'All', productsCount: this.totalCount }, ...response];
     }, error => {
       console.log(error);
     });
+
+    // this.brands.forEach(brand => {
+    //   this.shopService.getCountOfProductsFromBrand(brand.id).subscribe(response =>{
+    //     this.brands[brand.id].productsCount = response;
+    //   console.log(response);
+    //   })
+    // });
   }
+
+  // getCountOfProductsFromBrand(brandId: number) {
+  //   this.shopService.getCountOfProductsFromBrand(brandId).subscribe(response =>{
+  //     this.brands[brandId].productsCount = response;
+  //     console.log(response);
+  //   });
+  // }
 
   getTypes() {
     this.shopService.getTypes().subscribe(response => {
@@ -95,6 +116,7 @@ export class ShopComponent implements OnInit {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopParams.pageNumber = 1;
     this.getProducts();
+    console.log(this.searchTerm.nativeElement.value);
   }
 
   onReset() {
