@@ -33,7 +33,6 @@ namespace Infrastructure.Data
             }
 
             return await GetBasketAsync(basket.Id);
-            
         }
 
         public async Task<bool> DeleteBasketAsync(string basketId)

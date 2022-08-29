@@ -7,7 +7,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { PagerComponent } from './Components/pager/pager.component';
 import { FormsModule } from '@angular/forms';
-import {CarouselModule} from 'ngx-bootstrap/carousel'
+import {CarouselModule} from 'ngx-bootstrap/carousel';
+import { OrderTotalsComponent } from './Components/order-totals/order-totals.component'
 
 
 @NgModule({
@@ -15,8 +16,8 @@ import {CarouselModule} from 'ngx-bootstrap/carousel'
     PagingHeaderComponent,
     CustomMultiselectDropdownComponent,
     PagerComponent,
-    
-    
+    OrderTotalsComponent,
+
   ],
   imports: [
     FormsModule,
@@ -31,7 +32,8 @@ import {CarouselModule} from 'ngx-bootstrap/carousel'
     PagingHeaderComponent,
     CustomMultiselectDropdownComponent,
     PagerComponent,
-    CarouselModule
+    CarouselModule,
+    OrderTotalsComponent
   ]
 })
 export class SharedModule { }

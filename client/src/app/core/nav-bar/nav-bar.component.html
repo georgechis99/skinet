@@ -13,10 +13,22 @@ fixed-top">
       </a>
     </nav>
     <div class="d-flex align-items-center">
-        <a class="positon-relative">
+
+        <a routerLink="/basket" class="positon-relative">
             <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
-            <div class="cart-no">5</div>
+            <div *ngIf="(basketTotal$ | async) as totals" class="cart-no">
+              
+              <!-- <ng-continer *ngFor="let item of basket.items">
+                <span [counter]=""></span>
+            
+              </ng-continer> -->
+
+              {{totals.basketItemsCount}}
+            
+            
+            </div>
         </a>
+
         <a class="btn btn-outline-secondary mr-2">Login</a>
         <a class="btn btn-outline-secondary mr-3">Sign up</a>
     </div>
