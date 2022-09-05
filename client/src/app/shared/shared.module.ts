@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {PaginationModule} from 'ngx-bootstrap/pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PagingHeaderComponent } from './Components/paging-header/paging-header.component';
 import { CustomMultiselectDropdownComponent } from './Components/custom-multiselect-dropdown/custom-multiselect-dropdown.component'
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { PagerComponent } from './Components/pager/pager.component';
-import { FormsModule } from '@angular/forms';
-import {CarouselModule} from 'ngx-bootstrap/carousel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { OrderTotalsComponent } from './Components/order-totals/order-totals.component'
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TextInputComponent } from './Components/text-input/text-input.component'
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { OrderTotalsComponent } from './Components/order-totals/order-totals.com
     CustomMultiselectDropdownComponent,
     PagerComponent,
     OrderTotalsComponent,
+    TextInputComponent,
+
 
   ],
   imports: [
@@ -25,7 +29,9 @@ import { OrderTotalsComponent } from './Components/order-totals/order-totals.com
     PaginationModule.forRoot(),
     MatCheckboxModule,
     CollapseModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ReactiveFormsModule
   ],
   exports: [
     PaginationModule,
@@ -33,7 +39,10 @@ import { OrderTotalsComponent } from './Components/order-totals/order-totals.com
     CustomMultiselectDropdownComponent,
     PagerComponent,
     CarouselModule,
-    OrderTotalsComponent
+    OrderTotalsComponent,
+    ReactiveFormsModule,
+    BsDropdownModule,
+    TextInputComponent
   ]
 })
 export class SharedModule { }
