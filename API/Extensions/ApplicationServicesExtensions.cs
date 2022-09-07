@@ -10,27 +10,33 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Extensions
 {
-    public static class ApplicationServicesExtensions 
+    public static class ApplicationServicesExtensions
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services){
-            
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<ITokenService, TokenService>();
+
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
-            
+
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
-                options.InvalidModelStateResponseFactory = actionContext => 
+                options.InvalidModelStateResponseFactory = actionContext =>
                 {
                     var errors = actionContext.ModelState
                     .Where(e => e.Value.Errors.Count > 0)
                     .SelectMany(x => x.Value.Errors)
                     .Select(x => x.ErrorMessage).ToArray();
 
-                    var errorResponse = new ApiValidationErrorResponse{
+                    var errorResponse = new ApiValidationErrorResponse
+                    {
 
                         Errors = errors
                     };

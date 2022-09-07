@@ -20,8 +20,6 @@ import { TextInputComponent } from './Components/text-input/text-input.component
     PagerComponent,
     OrderTotalsComponent,
     TextInputComponent,
-
-
   ],
   imports: [
     FormsModule,
