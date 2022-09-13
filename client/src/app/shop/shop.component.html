@@ -7,36 +7,46 @@
             <ng-container *ngIf="types && brands">
 
                 <h5 class="text-warning mt-4 mb-3">Sort</h5>
-            <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
-                <option *ngFor="let sort of sortOptions" [value]="sort.value">
-                    {{sort.name}}
-                </option>
-            </select>
+                <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
+                    <option *ngFor="let sort of sortOptions" [value]="sort.value">
+                        {{sort.name}}
+                    </option>
+                </select>
 
-            <!-- <app-custom-multiselect-dropdown
+                <!-- <app-custom-multiselect-dropdown
                 [title]="multiselectDropdownTitle"
                 [values]="multiselectDropdownValues"
             ></app-custom-multiselect-dropdown> -->
 
-            <h5 class="text-warning ml-3">Brands</h5>
+                <h5 class="text-warning ml-3">Brands</h5>
 
-            <ul class="list-group my-3 custom-filter">
-                <a class="list-group-item list-group-item-action" *ngFor="let brand of brands"
-                    [class.active]="brand.id === this.shopParams.brandId" [value]="brand.id"
-                    (click)="onBrandSelected(brand.id)">
-                    {{brand.name}} ({{brand.productsCount}})
-                </a>
-            </ul>
+                <ul class="list-group my-3 custom-filter">
+                    <a class="list-group-item list-group-item-action" *ngFor="let brand of brands"
+                        [class.active]="brand.id === this.shopParams.brandId" [value]="brand.id"
+                        (click)="onBrandSelected(brand.id)">
 
-            <h5 class="text-warning ml-3">Types</h5>
+                        {{brand.name}}
 
-            <ul class="list-group my-3 custom-filter">
-                <li class="list-group-item list-group-item-action" *ngFor="let type of types"
-                    [class.active]="type.id === this.shopParams.typeId" [value]="type.id"
-                    (click)="onTypeSelected(type.id)">
-                    {{type.name}} ({{type.productsCount}})
-                </li>
-            </ul>
+                        <ng-container *ngIf="brand.id !== 0">
+                            ({{brand.productsCount}})
+                        </ng-container> 
+                    </a>
+                </ul>
+
+                <h5 class="text-warning ml-3">Types</h5>
+
+                <ul class="list-group my-3 custom-filter">
+                    <li class="list-group-item list-group-item-action" *ngFor="let type of types"
+                        [class.active]="type.id === this.shopParams.typeId" [value]="type.id"
+                        (click)="onTypeSelected(type.id)">
+
+                        {{type.name}} 
+                        
+                        <ng-container *ngIf="type.id !== 0">
+                            ({{type.productsCount}})
+                        </ng-container> 
+                    </li>
+                </ul>
 
             </ng-container>
 
