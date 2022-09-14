@@ -1,27 +1,29 @@
-<ng-container *ngIf="(basket$ | async) as basket">
+
 
     <div class="table-responsive">
-        <div class="table">
-            <thead>
-                <tr>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase" *ngIf="isBasket" style="width: 600px;">Product</div>
-                        <div class="p-2 px-3 text-uppercase" *ngIf="!isBasket" style="width:400px">Product</div>
-                    </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase">Price</div>
-                    </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase">Quantity</div>
-                    </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase">Total</div>
-                    </th>
-                    <th *ngIf="isBasket" class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase">Remove</div>
-                    </th>
-                </tr>
-            </thead>
+    <div class="table">
+        <thead>
+            <tr>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3 text-uppercase" *ngIf="isBasket" style="width: 600px;">Product</div>
+                    <div class="p-2 px-3 text-uppercase" *ngIf="!isBasket" style="width:400px">Product</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3 text-uppercase">Price</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3 text-uppercase">Quantity</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3 text-uppercase">Total</div>
+                </th>
+                <th *ngIf="isBasket" class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3 text-uppercase">Remove</div>
+                </th>
+            </tr>
+        </thead>
+
+        <ng-container *ngIf="!isOrder">
             <tbody *ngIf="(basket$ | async) as basket">
                 <tr *ngFor="let item of basket.items">
     
@@ -85,8 +87,47 @@
                     </td>
                 </tr>
             </tbody>
-        </div>
-    </div>
+        </ng-container>
 
-</ng-container>
+        <ng-container *ngIf="isOrder">
+            <tbody >
+                <tr *ngFor="let item of items">
+    
+                    <td scope="row" style="width: 400px;">
+                        <div class="p-2" >
+    
+                            <img src="{{item.pictureUrl}}" style="max-height: 70px;"
+                                alt="{{item.productName}}" class="img-fluid">
+    
+                            <div class="ml-3 d-inline-block align-middle" >
+                                <h2 class="mb-0" >
+                                    <a class="text-dark">{{item.productName}}</a>
+                                </h2>
+                            </div>
+
+                        </div>
+                    </td>
+    
+                    <td class="align-middle"><strong>{{item.price | currency}}</strong></td>
+    
+                    <td class="align-middle">
+                        <div class="d-flex align-items-center justify-content-center" >
+                            
+                            <span>
+                                <strong>{{item.quantity}}</strong>
+                            </span>
+    
+                        </div>
+                    </td>
+    
+                    <td class="align-middle"><strong>{{item.price * item.quantity | currency}}</strong></td>
+    
+                    
+                </tr>
+            </tbody>
+        </ng-container>
+
+    </div>
+</div>
+
 

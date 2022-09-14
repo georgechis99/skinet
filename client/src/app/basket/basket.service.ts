@@ -17,7 +17,7 @@ export class BasketService {
 
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
-  
+
   private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
@@ -35,7 +35,7 @@ export class BasketService {
     );
   }
 
-  setShippingPrice(deliveryMethod: IDeliveryMethod){
+  setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.shipping = deliveryMethod.price;
     this.calculateTotals();
   }
@@ -102,14 +102,14 @@ export class BasketService {
       } else {
 
         const toastrTitle = "Your cart is empty";
-        this.toastr.error( toastrTitle);
+        this.toastr.error(toastrTitle);
 
         this.deleteBasket(basket);
       }
     }
   }
 
-  deleteLocalBasket(basketId: string){
+  deleteLocalBasket(basketId: string) {
     this.basketSource.next(null);
     this.basketTotalSource.next(null);
     localStorage.removeItem('basket_id');
