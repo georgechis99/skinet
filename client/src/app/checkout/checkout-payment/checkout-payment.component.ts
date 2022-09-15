@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BasketService } from 'src/app/basket/basket.service';
@@ -13,7 +13,7 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-payment.component.scss']
 })
 export class CheckoutPaymentComponent implements OnInit {
-  @Input() checkoutForm: FormGroup;
+  @Input() checkoutForm: UntypedFormGroup;
 
   constructor(private basketService: BasketService, private checkoutService: CheckoutService,
               private toastr: ToastrService, private router: Router) { }
