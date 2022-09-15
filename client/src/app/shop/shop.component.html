@@ -8,22 +8,21 @@
 
                 <h5 class="text-warning mt-4 mb-3">Sort</h5>
                 <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
-                    <option *ngFor="let sort of sortOptions" [value]="sort.value">
+                    <option *ngFor="let sort of sortOptions" 
+                        [selected]="shopParams.sort === sort.value"    
+                        [value]="sort.value">
                         {{sort.name}}
                     </option>
                 </select>
-
-                <!-- <app-custom-multiselect-dropdown
-                [title]="multiselectDropdownTitle"
-                [values]="multiselectDropdownValues"
-            ></app-custom-multiselect-dropdown> -->
 
                 <h5 class="text-warning ml-3">Brands</h5>
 
                 <ul class="list-group my-3 custom-filter">
                     <a class="list-group-item list-group-item-action" *ngFor="let brand of brands"
-                        [class.active]="brand.id === this.shopParams.brandId" [value]="brand.id"
-                        (click)="onBrandSelected(brand.id)">
+                        [class.active]="brand.id === this.shopParams.brandId" 
+                        [value]="brand.id"
+                        (click)="onBrandSelected(brand.id)"
+                        [class.disabled]="brand.productsCount === 0 && brand.id !== 0">
 
                         {{brand.name}}
 
@@ -37,8 +36,11 @@
 
                 <ul class="list-group my-3 custom-filter">
                     <li class="list-group-item list-group-item-action" *ngFor="let type of types"
-                        [class.active]="type.id === this.shopParams.typeId" [value]="type.id"
-                        (click)="onTypeSelected(type.id)">
+                        [class.active]="type.id === this.shopParams.typeId" 
+                        [value]="type.id"
+                        (click)="onTypeSelected(type.id)"
+                        [class.disabled]="type.productsCount === 0 && type.id !== 0"
+                        >
 
                         {{type.name}} 
                         
@@ -73,7 +75,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
-                <app-pager [pageSize]="shopParams.pageSize" [totalCount]="totalCount"
+                <app-pager 
+                    [pageSize]="shopParams.pageSize" 
+                    [totalCount]="totalCount"
+                    [pageNumber]="shopParams.pageNumber"
                     (pageChanged)="onPageChanged($event)">
                 </app-pager>
             </div>
